@@ -1,0 +1,1 @@
+CREATE TABLE mykeyspace.person (id TimeUUID PRIMARY KEY, name text);
