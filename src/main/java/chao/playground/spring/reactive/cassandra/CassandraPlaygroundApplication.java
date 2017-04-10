@@ -1,4 +1,4 @@
-package chao.playground.spring.reactive;
+package chao.playground.spring.reactive.cassandra;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -9,13 +9,13 @@ import org.springframework.data.cassandra.repository.config.EnableReactiveCassan
 
 @SpringBootApplication
 @EnableReactiveCassandraRepositories
-public class PlaygroundApplication extends AbstractReactiveCassandraConfiguration {
+public class CassandraPlaygroundApplication extends AbstractReactiveCassandraConfiguration {
 
   @Autowired
   private CassandraProperties properties;
 
   public static void main(String[] args) {
-    SpringApplication.run(PlaygroundApplication.class, args);
+    SpringApplication.run(CassandraPlaygroundApplication.class, args);
   }
 
   @Override
