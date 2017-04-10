@@ -8,7 +8,7 @@ import org.springframework.data.cassandra.config.java.AbstractReactiveCassandraC
 import org.springframework.data.cassandra.repository.config.EnableReactiveCassandraRepositories;
 
 @SpringBootApplication
-@EnableReactiveCassandraRepositories()
+@EnableReactiveCassandraRepositories
 public class PlaygroundApplication extends AbstractReactiveCassandraConfiguration {
 
   @Autowired

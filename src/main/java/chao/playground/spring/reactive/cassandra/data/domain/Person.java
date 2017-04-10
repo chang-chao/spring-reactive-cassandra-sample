@@ -1,4 +1,4 @@
-package chao.playground.spring.reactive.data.domain;
+package chao.playground.spring.reactive.cassandra.data.domain;
 
 import java.util.UUID;
 

@@ -1,8 +1,8 @@
-package chao.playground.spring.reactive.repository;
+package chao.playground.spring.reactive.cassandra.repository;
 
 import org.springframework.data.cassandra.repository.ReactiveCassandraRepository;
 
-import chao.playground.spring.reactive.data.domain.Person;
+import chao.playground.spring.reactive.cassandra.data.domain.Person;
 
 public interface PersonRepository extends ReactiveCassandraRepository<Person, String> {
 
