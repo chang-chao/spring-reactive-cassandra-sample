@@ -32,12 +32,12 @@ public class StudentDAOImpl implements StudentDAO {
   }
 
   @Override
-  public Observable<Boolean> save(Student student) {
-    Observable<Boolean> begin = db.beginTransaction();
-
-    Observable<Integer> count = db.update("insert into student(name) values(?)").dependsOn(begin)
-        .parameters(student.getName()).count();
-    Observable<Boolean> commit = db.commit(count);
-    return commit;
+  public Observable<Integer> save(Student student) {
+  //  Observable<Boolean> begin = db.beginTransaction();
+    Observable<Integer> id = db.update("insert into student(name) values(?)")
+        //.dependsOn(begin)
+        .parameters(student.getName()).returnGeneratedKeys().getAs(Integer.class);
+//    Observable<Boolean> commit = db.commit(id).exists(r->r);
+    return id;
   }
 }

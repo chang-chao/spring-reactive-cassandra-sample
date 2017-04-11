@@ -22,9 +22,9 @@ public class StudentController {
   }
 
   @RequestMapping(value = "/save")
-  public Observable<Boolean> save() {
+  public Observable<Integer> save() {
     Student student = new Student();
-    student.setName("randomName+" + new Random().nextInt());
+    student.setName("randomName:" + new Random().nextDouble());
     return studentDao.save(student);
   }
 
