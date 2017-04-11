@@ -1,5 +1,7 @@
 package chao.playground.spring.reactive.jdbc.web;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +19,13 @@ public class StudentController {
   @RequestMapping(value = "/")
   public Observable<Student> list() {
     return studentDao.getAllStudents();
+  }
+
+  @RequestMapping(value = "/save")
+  public Observable<Boolean> save() {
+    Student student = new Student();
+    student.setName("randomName+" + new Random().nextInt());
+    return studentDao.save(student);
   }
 
 }

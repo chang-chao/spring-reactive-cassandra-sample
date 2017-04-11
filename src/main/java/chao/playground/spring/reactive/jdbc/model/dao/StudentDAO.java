@@ -5,4 +5,5 @@ import rx.Observable;
 
 public interface StudentDAO {
   public Observable<Student> getAllStudents();
+  public Observable<Boolean> save(Student student);
 }

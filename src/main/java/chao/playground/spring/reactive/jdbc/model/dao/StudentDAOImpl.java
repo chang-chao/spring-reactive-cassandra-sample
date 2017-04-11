@@ -17,7 +17,7 @@ public class StudentDAOImpl implements StudentDAO {
 
   @Autowired
   public void setDataSource(DataSource ds) {
-    this.db = Database.fromDataSource(ds);
+    this.db = Database.fromDataSource(ds).asynchronous();
   }
 
   @Override
@@ -29,5 +29,15 @@ public class StudentDAOImpl implements StudentDAO {
           student.setName(String.valueOf(empRow._2()));
           return student;
         });
+  }
+
+  @Override
+  public Observable<Boolean> save(Student student) {
+    Observable<Boolean> begin = db.beginTransaction();
+
+    Observable<Integer> count = db.update("insert into student(name) values(?)").dependsOn(begin)
+        .parameters(student.getName()).count();
+    Observable<Boolean> commit = db.commit(count);
+    return commit;
   }
 }
