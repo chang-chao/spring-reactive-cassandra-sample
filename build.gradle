@@ -33,9 +33,25 @@ repositories {
 dependencies {
 	compile("org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}")
   compile("org.springframework.boot:spring-boot-starter-data-cassandra:${springBootVersion}")
-  compile('com.github.alaisi.pgasync:postgres-async-driver:0.9')
+  compile("org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}")
+  compile("com.h2database:h2:1.4.194")
   compile('com.github.davidmoten:rxjava-jdbc:0.7.4')
+  compile('io.reactivex:rxjava-reactive-streams:1.2.1')
 
   compileOnly 'org.projectlombok:lombok:1.16.10'
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+}
+
+configurations.all {
+  resolutionStrategy {
+
+    // force certain versions of dependencies (including transitive)
+    //  *append new forced modules:
+    force 'org.springframework:spring-core:5.0.0.BUILD-SNAPSHOT'
+
+    // cache dynamic versions for 10 minutes
+    cacheDynamicVersionsFor 10*60, 'seconds'
+    // don't cache changing modules at all
+    cacheChangingModulesFor 0, 'seconds'
+  }
 }
