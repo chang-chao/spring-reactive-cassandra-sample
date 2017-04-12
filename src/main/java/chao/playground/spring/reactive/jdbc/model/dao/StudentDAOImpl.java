@@ -9,6 +9,7 @@ import com.github.davidmoten.rx.jdbc.Database;
 
 import chao.playground.spring.reactive.jdbc.model.Student;
 import rx.Observable;
+import rx.schedulers.Schedulers;
 
 @Service
 public class StudentDAOImpl implements StudentDAO {
@@ -32,12 +33,15 @@ public class StudentDAOImpl implements StudentDAO {
   }
 
   @Override
-  public Integer save(Student student) {
+  public Observable<Integer> save(Student student) {
     Observable<Boolean> begin = db.beginTransaction();
-    Integer id = db.update("insert into student(name) values(?)").dependsOn(begin)
-        .parameters(student.getName()).returnGeneratedKeys().getAs(Integer.class).toBlocking()
-        .single();
-    db.commit().toBlocking().first();
-    return id;
+    Observable<Integer> id = db.update("insert into student(name) values(?)")
+        .parameters(student.getName()).returnGeneratedKeys().getAs(Integer.class);
+
+    Observable<Boolean> commit = db.commit();
+
+    Observable<Integer> committedId = Observable.concat(begin, id, commit)
+        .subscribeOn(Schedulers.io()).toList().map(list -> (Integer) list.get(1));
+    return committedId;
   }
 }
