@@ -41,7 +41,15 @@ public class StudentDAOImpl implements StudentDAO {
     Observable<Boolean> commit = db.commit();
 
     Observable<Integer> committedId = Observable.concat(begin, id, commit)
-        .subscribeOn(Schedulers.io()).toList().map(list -> (Integer) list.get(1));
+
+        // this line is very important to make the db operations
+        // to be executed in a seperate thread from the http io thread
+        // thus notblocking the http io thread.
+        //
+        .subscribeOn(Schedulers.io())
+        //
+
+        .toList().map(list -> (Integer) list.get(1));
     return committedId;
   }
 }
