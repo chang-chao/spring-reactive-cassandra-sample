@@ -31,15 +31,20 @@ repositories {
 
 
 dependencies {
-	compile("org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}")
+  compile("org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}")
+
+  //compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+  compile( group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0')
+
   compile("org.springframework.boot:spring-boot-starter-data-cassandra:${springBootVersion}")
   compile("org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}")
   compile("com.h2database:h2:1.4.194")
   compile('com.github.davidmoten:rxjava-jdbc:0.7.4')
   compile('io.reactivex:rxjava-reactive-streams:1.2.1')
+  
 
   compileOnly 'org.projectlombok:lombok:1.16.10'
-	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+  testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 }
 
 configurations.all {
