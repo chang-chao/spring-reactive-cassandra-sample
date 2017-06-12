@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.0.BUILD-SNAPSHOT'
+		springBootVersion = '2.0.0.M1'
 	}
 	repositories {
 		mavenCentral()
@@ -47,7 +47,7 @@ configurations.all {
 
     // force certain versions of dependencies (including transitive)
     //  *append new forced modules:
-    force 'org.springframework:spring-core:5.0.0.BUILD-SNAPSHOT'
+   // force 'org.springframework:spring-core:5.0.0.BUILD-SNAPSHOT'
 
     // cache dynamic versions for 10 minutes
     cacheDynamicVersionsFor 10*60, 'seconds'
