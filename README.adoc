@@ -6,6 +6,7 @@ To run the project, need to run below `cql` commands on Cassandra.
 [source,indent=0]
 ----
 	CREATE KEYSPACE mykeyspace WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+	CREATE TABLE mykeyspace.person (id TimeUUID PRIMARY KEY, name text);
 ----
 
 == Table Creation in Cassandra
