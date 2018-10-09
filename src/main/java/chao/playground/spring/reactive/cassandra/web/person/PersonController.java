@@ -9,6 +9,7 @@ import com.datastax.driver.core.utils.UUIDs;
 
 import chao.playground.spring.reactive.cassandra.data.domain.Person;
 import chao.playground.spring.reactive.cassandra.repository.PersonRepository;
+import net.bytebuddy.utility.RandomString;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -25,8 +26,8 @@ public class PersonController {
 
 	@RequestMapping(value = "/add")
 	public Mono<Person> add() {
-		Person alice = new Person(UUIDs.timeBased(), "Alice");
-		return personRepository.insert(alice);
+		Person person = new Person(UUIDs.timeBased(), RandomString.make(10));
+		return personRepository.insert(person);
 	}
 
 	@GetMapping(path = "/sse", produces = "text/event-stream")
